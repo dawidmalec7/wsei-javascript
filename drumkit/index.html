@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Drumkit</title>
+    <script src="drumkit.js"></script>
+</head>
+<body>
+    <style>
+        .keyPress{
+            width:100px;
+            height:300px;
+            border:1px solid #3a3636;
+            position: relative;
+        }
+        .keyPress span{
+          position: absolute;
+          top: 30%;
+          left: 50%; 
+          transform: translate(-30%, -50%);
+          font-size: 2.6vw;
+        }
+        .keyPress.clicked{
+          box-shadow: 0px 0px 11px 5px rgb(132, 127, 127);
+        }
+        .keyPress:before{
+          content:"";
+          position:absolute;
+          bottom:0;
+          height:100px;
+          width:100%;
+          background: black;
+        }
+        .container{
+          max-width: 900px;
+          height:90vh;
+          margin:auto;
+        }
+        .flexWrapper{
+          display: flex;
+          justify-content: center;
+          align-items:center;
+        }
+        .piano{
+          display: flex;
+          justify-content: center;
+          align-items:center;
+          border:1px solid #3a3636;
+        }
+        .countingDownWrapper{
+          position: absolute;
+          top: 20%;  
+          left: 50%;
+          transform: translate(-50%, -50%);
+          font-size:50px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          background: rgba(0,0,0,0.3);
+          z-index: 3333;
+        }
+        .countingDownWrapper .count{
+          color:red;
+        }
+        .channels .channel{
+          margin: 10px 0;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+        .channels button{
+          width:200px;
+          appearance: none;
+          -webkit-appearance: none;
+          color:white;
+          background: black;
+          border:1px solid black;
+          border-radius:5px;
+          padding: 10px 20px;
+          transition: all .3s ease-in-out;
+          cursor:pointer;
+        }
+        .channels button:hover{
+          color:black;
+          background: white;
+        }
+        .channel-name{
+          font-size:25px;
+          text-transform: uppercase;
+        }
+    </style>
+    
+    <div class="container">
+       <div class="channels">
+          <div class="channel channel1">
+           <button id="rec">Nagrywaj</button>
+           <button id="play">Odtwarzaj</button>
+           <button id="clear">Wyczyść</button>
+           <p class="channel-name">Channel 1</p>
+          </div>
+          <div class="channel channel2">
+           <button id="rec">Nagrywaj</button>
+           <button id="play">Odtwarzaj</button>
+           <button id="clear">Wyczyść</button>
+           <p class="channel-name">Channel 2</p>
+          </div>
+          <div class="channel channel3">
+           <button id="rec">Nagrywaj</button>
+           <button id="play">Odtwarzaj</button>
+           <button id="clear">Wyczyść</button>
+           <p class="channel-name">Channel 3</p>
+          </div>
+          <div class="channel channel4">
+           <button id="rec">Nagrywaj</button>
+           <button id="play">Odtwarzaj</button>
+           <button id="clear">Wyczyść</button>
+           <p class="channel-name">Channel 4</p>
+          </div>
+       </div>
+       <div class="countingDownWrapper">
+        <p class="startChannel"></p>
+        <span class="count"></span>
+       </div>
+       <div class="flexWrapper">
+        <div class="piano">
+          <div class="keyPress clicked">
+              <span>A</span>
+              <audio src="./sounds/boom.wav" id="boom"></audio>
+          </div>
+          <div class="keyPress">
+              <span>S</span>
+              <audio src="./sounds/clap.wav" id="clap"></audio>
+          </div>
+          <div class="keyPress ">
+              <span>D</span>
+              <audio src="./sounds/hihat.wav" id="hihat"></audio>
+          </div>
+          <div class="keyPress ">
+              <span>F</span>
+              <audio src="./sounds/kick.wav" id="kick"></audio>
+          </div>
+          <div class="keyPress ">
+              <span>G</span>
+              <audio src="./sounds/openhat.wav" id="openhat"></audio>
+          </div>
+          <div class="keyPress ">
+              <span>H</span>
+              <audio src="./sounds/ride.wav" id="ride"></audio>
+          </div>
+          <div class="keyPress ">
+              <span>J</span>
+              <audio src="./sounds/snare.wav" id="snare"></audio>
+          </div>
+          <div class="keyPress ">
+              <span>K</span>
+              <audio src="./sounds/tink.wav" id="tink"></audio>
+          </div>
+          <div class="keyPress ">
+              <span>L</span>
+              <audio src="./sounds/tom.wav" id="tom"></audio>
+          </div>
+        </div>
+    </div>
+  </div>
+</body>
+</html>
