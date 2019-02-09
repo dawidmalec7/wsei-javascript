@@ -11,24 +11,36 @@
 <body>
     <canvas id="plotno" width="600" height="400"></canvas>
     <div>
+      <div class="form-control">
+        <button id="greyscale">Szarość</button>
+      </div>
+        <div class="form-control">
+        <button id="negatyw">Negatyw</button>
+      </div>
      <div class="form-control">
-         <label for="">Jasność</label>
-         <input type="range" id="jasnosc" min="1" max="100" step="1" value="0">
+         <label for="jasnosc">Jasnosc (<span id="jasnoscValue">0</span>)</label>
+        <input id="jasnosc" type="range" value="0" min="-100" max="100">
      </div>
+      <div class="form-control">
+        <label for="">Kontrast(<span id="kontrastValue">0</span>)</label>
+        <input type="range" id="kontrast" min="-100" max="100" value="0">
+    </div>
      <div class="form-control">
         <label for="">Rozmycie</label>
-        <input type="range" id="rozmycie" min="1" max="100" step="1" value="0">
+        <input type="range" id="rozmycie" min="-30" max="30" step="1" value="0">
     </div>
-    <div class="form-control">
-        <label for="">Kontrast</label>
-        <input type="range" id="kontrast" min="1" max="100" step="1" value="0">
-    </div>
+
+
     </div>
 
     <script>
         let plik = document.querySelector("#grafika");
         let plotno = document.querySelector("#plotno");
         let btnJasnosc = document.querySelector('#jasnosc');
+        let btnGreyscale = document.querySelector('#greyscale');
+        let btnKontrast = document.querySelector('#kontrast');
+        let negatyw = document.querySelector('#negatyw');
+
         const zdjecie = "./img.jpg";
         let ctx = plotno.getContext('2d');
         let img = new Image();
@@ -36,19 +48,68 @@
         img.addEventListener('load', (e)=>{
             ctx.drawImage(img, 0, 0, plotno.width, plotno.height);
         });
-        btnJasnosc.addEventListener('change', (e)=>{
-            //jasnosc blur cos jeszcze
-           // console.log(e);
-            
+
+        function redraw(){
+          ctx.drawImage(img, 0, 0, plotno.width, plotno.height)
+        }
+
+        function truncateColor(value) {
+          if (value < 0) {
+            value = 0;
+          } else if (value > 255) {
+            value = 255;
+          }
+
+          return value;
+        }
+
+        btnGreyscale.addEventListener('click', (e) =>{
+         let imageData = ctx.getImageData(0, 0, plotno.width, plotno.height)
+          for (let i = 0; i < imageData.data.length; i+= 4) {
+          let value = (imageData.data[i] + imageData.data[i + 1] + imageData.data[i + 2]) / 3
+              imageData.data[i]     = value;
+              imageData.data[i + 1] = value;
+              imageData.data[i + 2] = value;
+          }
+          ctx.putImageData(imageData, 0, 0);
+        });
+
+        negatyw.addEventListener('click', (e) => {
+         redraw();
+         let imageData = ctx.getImageData(0, 0, plotno.width, plotno.height)
+          for (let i = 0; i < imageData.data.length; i+= 4) {
+              imageData.data[i]     = imageData.data[i] ^ 255;
+              imageData.data[i + 1] = imageData.data[i] ^ 255;
+              imageData.data[i + 2] = imageData.data[i] ^ 255;
+          }
+          ctx.putImageData(imageData, 0, 0);
+        })
+  
+        btnJasnosc.addEventListener("change", (e)=>{
             let imageData = ctx.getImageData(0, 0, plotno.width, plotno.height);
-           // console.log(imageData);
-            for(let i = 0; i < imageData.data.length; i+=4){
-                imageData.data[i] = Math.min(255, imageData.data[i] +  (e.target.value / 10));
-                imageData.data[i+1] = Math.min(255, imageData.data[i] + (e.target.value / 10));
-                imageData.data[i+2] = Math.min(255, imageData.data[i] + (e.target.value / 10));
+            let value = parseInt(e.target.value, 10) / 100;
+             document.getElementById("jasnoscValue").innerHTML = value;
+           for (var i = 0; i < imageData.data.length; i+= 4) {
+              imageData.data[i] += 255 * value;
+              imageData.data[i+1] += 255 * value;
+              imageData.data[i+2] += 255 * value;
             }
             ctx.putImageData(imageData, 0, 0);
         })
+
+        btnKontrast.addEventListener("change", (e)=>{
+          redraw()
+           let imageData = ctx.getImageData(0, 0, plotno.width, plotno.height);
+           let contrast = parseInt(e.target.value, 10) * 2;
+           document.getElementById("kontrastValue").innerHTML = e.target.value;
+          var factor = (259.0 * (contrast + 255.0)) / (255.0 * (259.0 - contrast));
+           for (var i = 0; i < imageData.data.length; i+= 4) {
+              imageData.data[i] += truncateColor(factor * (imageData.data[i] - 128.0) + 128.0);
+              imageData.data[i+1] += truncateColor(factor * (imageData.data[i+1] - 128.0) + 128.0);
+              imageData.data[i+2] += truncateColor(factor * (imageData.data[i+2] - 128.0) + 128.0);
+            }
+            ctx.putImageData(imageData, 0, 0);
+        });
         
     </script>
 </body>
