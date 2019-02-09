@@ -124,33 +124,14 @@ function playSound(e) {
     audioDOM.currentTime = 0;
     audioDOM.play();
 
-    if (activeChannels[0].isRecording){
-        activeChannels[0].sounds.push({
+  activeChannels.forEach((channel) =>{
+    if(channel.isRecording){
+      channel.sounds.push({
             sound: soundName,
-            time: Date.now() - activeChannels[0].recStart
+            time: Date.now() - channel.recStart
         });
     }
-
-    if (activeChannels[1].isRecording){
-        activeChannels[1].sounds.push({
-            sound: soundName,
-            time: Date.now() - activeChannels[1].recStart
-        });
-    }
-
-    if (activeChannels[2].isRecording){
-        activeChannels[2].sounds.push({
-            sound: soundName,
-            time: Date.now() - activeChannels[2].recStart
-        });
-    }
-
-    if (activeChannels[3].isRecording){
-        activeChannels[3].sounds.push({
-            sound: soundName,
-            time: Date.now() -activeChannels[3].recStart
-        });
-    }
+  });
 }
 /*
 * Funkcja służy do nadania klasy jeśli dany dzwiek jest odgrywany
