@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Edytor graficzny</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <canvas id="plotno" width="600" height="400"></canvas>
+    <div>
+     <div class="form-control">
+         <label for="">Jasność</label>
+         <input type="range" id="jasnosc" min="1" max="100" step="1" value="0">
+     </div>
+     <div class="form-control">
+        <label for="">Rozmycie</label>
+        <input type="range" id="rozmycie" min="1" max="100" step="1" value="0">
+    </div>
+    <div class="form-control">
+        <label for="">Kontrast</label>
+        <input type="range" id="kontrast" min="1" max="100" step="1" value="0">
+    </div>
+    </div>
+
+    <script>
+        let plik = document.querySelector("#grafika");
+        let plotno = document.querySelector("#plotno");
+        let btnJasnosc = document.querySelector('#jasnosc');
+        const zdjecie = "./img.jpg";
+        let ctx = plotno.getContext('2d');
+        let img = new Image();
+        img.src = zdjecie;
+        img.addEventListener('load', (e)=>{
+            ctx.drawImage(img, 0, 0, plotno.width, plotno.height);
+        });
+        btnJasnosc.addEventListener('change', (e)=>{
+            //jasnosc blur cos jeszcze
+           // console.log(e);
+            
+            let imageData = ctx.getImageData(0, 0, plotno.width, plotno.height);
+           // console.log(imageData);
+            for(let i = 0; i < imageData.data.length; i+=4){
+                imageData.data[i] = Math.min(255, imageData.data[i] +  (e.target.value / 10));
+                imageData.data[i+1] = Math.min(255, imageData.data[i] + (e.target.value / 10));
+                imageData.data[i+2] = Math.min(255, imageData.data[i] + (e.target.value / 10));
+            }
+            ctx.putImageData(imageData, 0, 0);
+        })
+        
+    </script>
+</body>
+</html>
