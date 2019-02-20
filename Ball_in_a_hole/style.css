@@ -6,6 +6,8 @@ body {
   background-position: center;
   background-repeat: no-repeat;
   background-size: cover;
+  height: 100vh;
+  display: flex;
 }
 .container {
     position: relative;
@@ -13,6 +15,7 @@ body {
     height: 500px;
     border-radius: 10px;
     background: rgba(84, 77, 74, 0.67);
+    margin: auto;
   }
   
 .ball {
@@ -26,11 +29,17 @@ body {
     visibility: hidden;
   }
 
-  .hole.checkpoint {
+  .checkpoint {
     top   : 10px;
     left  : 220px;
     background: white;
     visibility: hidden;
+    position: absolute;
+    box-shadow: 0 0 20px black;
+    border-radius: 100%;
+    visibility: hidden;
+    width : 52px;
+    height: 52px;
   }
   .hole{
     position: absolute;
@@ -43,19 +52,29 @@ body {
   }
 
   .hole1 {
-    top   : 100px;
-    left  : 220px;
+    top   : 140px;
+    left  : 200px;
   }
 
   .hole2 {
-    top   : 200px;
-    left  : 280px;
+    top   : 300px;
+    left  : 180px;
   }
 
   .hole3 {
-    top   : 270px;
+    top   : 370px;
+    left  : 250px;
+  }
+  .hole4 {
+    top   : 80px;
     left  : 150px;
   }
+  
+  .hole5 {
+    top   : 270px;
+    left  : 250px;
+  }
+
 
   .info {
     position: absolute;
