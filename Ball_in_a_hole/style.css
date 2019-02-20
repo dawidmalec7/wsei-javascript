@@ -101,7 +101,7 @@ body {
     font-size:20px;
     text-transform: uppercase;
     transition: 0.3s;
-    border: 2px solid red;
+    border: 2px solid grey;
     border-radius: 10px;
     cursor:pointer;
   }
@@ -112,26 +112,4 @@ body {
 
   .start:focus {
     outline: 0px;
-  }
-
-  .reset {
-    position: absolute;
-    margin-left: auto;
-    margin-right: auto;
-    left: 0;
-    right: 0;
-    padding: 5px 20px;
-    border-style: none;
-    background-color: rgba(237, 243, 238, 0.506);
-    border-radius: 20px;
-    box-shadow: 0 0 0 1px black, 0 0 0 6px rgba(237, 243, 238, 0.506);
-    font-size: 20px;
-    text-transform: uppercase;
-    transition: 0.3s;
-    cursor: pointer;
-  }
-
-  .reset:hover {
-    box-shadow: 0 0 0 3px black, 0 0 0 8px white;
-    border-radius: 40px;
   }
