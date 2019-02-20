@@ -89,23 +89,25 @@ body {
 
   .start {
     position: absolute;
-    top   : 30px;
-    left  : 580px;
-    width: 180px;
-    height: 60px;
-    font-size: 30px;
-    font-family: 'Courier New', Courier, monospace;
-    color: rgb(173, 236, 164);
-    background-color: rgba(0, 0, 0, 0.658);
-    border-radius: 20px;
-    border: 0px;
-    padding: 5px 20px;
-    transition: 1s;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
+    top: 10px;
+    width: 120px;
+    height: 50px;
+    background: grey;
+    color:white;
+    font-size:20px;
+    text-transform: uppercase;
+    transition: 0.3s;
+    border: 2px solid red;
+    border-radius: 10px;
+    cursor:pointer;
   }
 
   .start:hover {
-    color: rgba(0, 0, 0, 0.658);
-    background-color: rgb(173, 236, 164);
+    background: black;
   }
 
   .start:focus {
@@ -114,15 +116,16 @@ body {
 
   .reset {
     position: absolute;
-    top   : 90px;
-    left  : 580px;
+    margin-left: auto;
+    margin-right: auto;
+    left: 0;
+    right: 0;
     padding: 5px 20px;
     border-style: none;
     background-color: rgba(237, 243, 238, 0.506);
     border-radius: 20px;
     box-shadow: 0 0 0 1px black, 0 0 0 6px rgba(237, 243, 238, 0.506);
     font-size: 20px;
-    font-family: arial;
     text-transform: uppercase;
     transition: 0.3s;
     cursor: pointer;

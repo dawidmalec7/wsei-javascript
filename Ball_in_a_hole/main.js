@@ -39,9 +39,12 @@ function game(e) {
   }
 
 //Wygrana
-  if (ball_pos.top > checkpoint_pos.top - 20 && ball_pos.top < checkpoint_pos.top + 20 && ball_pos.left > checkpoint_pos.left -20 && ball_pos.left < checkpoint_pos.left + 20 )
+  if (ball_pos.top > checkpoint_pos.top - 20 
+      && ball_pos.top < checkpoint_pos.top + 20 
+      && ball_pos.left > checkpoint_pos.left -20 
+      && ball_pos.left < checkpoint_pos.left + 20 )
   {
-    manageInfo("Wygrałeś!", "green", "visible")
+    manageInfo("Wygrałeś!", "green", "visible");
     switchVisibility(false);
   }
   //Przegrana
@@ -49,7 +52,7 @@ function game(e) {
 
   if(isLose)
   {
-    manageInfo("Przegrałeś", "red", "visible")
+    manageInfo("Przegrałeś", "red", "visible");
     switchVisibility(false);
    
   }
