@@ -55,7 +55,6 @@ function DeviceOrientation(event) {
   {
     info.innerHTML = "Wygrałeś!"
     ball.style.visibility  = "hidden";
-    info.style.background = "rgba(11, 160, 23, 0.507)";
     checkpoint.style.visibility  = "hidden";
     hole1.style.visibility  = "hidden";
     hole2.style.visibility  = "hidden";
