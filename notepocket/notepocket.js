@@ -1,11 +1,22 @@
+/*
+* Pobranie elementów ze strony
+*/
 const form = {}
 form.noteText = document.querySelector('#formNoteText');
 form.addButton = document.querySelector('#formAddButton');
 form.color = document.querySelector('#formColor');
-
 const notes = document.querySelector('#notes');
 
+
+/*
+* Klasa do tworzenia notatek
+*/
+
 class NotePocket{
+
+  /*
+  * Metoda do tworzenia notatki
+  */
   addNote = () => {
     let text = form.noteText.value;
     let note = document.createElement('div');
@@ -23,21 +34,30 @@ class NotePocket{
     form.noteText.value = '';
     form.noteText.focus();
 
+    //trick z this
     let that = this;
+    /*
+    * Listener do usuwania notatki
+    */
     deleteButton.addEventListener('click', function (e) {
       e.stopPropagation();      
       that.deleteNote(e);
     });
   };
-
+  /*
+  * Metoda służąca do usuwania notatek
+  */
    deleteNote = function(e){
     let eventNote = e.target.parentNode;
     eventNote.parentNode.removeChild(eventNote);
   }
 
 }
- let NotePocketCl = new NotePocket();
-// Event Listeners
+
+// Deklaracja naszego obiektu NotePocket
+let NotePocketCl = new NotePocket();
+
+//Dodanie notatki za pomocą przycisku na stronie
 form.addButton.addEventListener('click', function (e) {
   e.preventDefault();  
   if (form.noteText.value != '') {
