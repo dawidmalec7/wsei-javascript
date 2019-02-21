@@ -9,29 +9,24 @@
     <title>NotePocket</title>
 </head>
 <body>
-    <header>
-        <h1>NotePocket</h1>
-    </header>  
-    <main>
-        <div id="button-addNote">
-            <p>dodaj Notatkę</p>
-        </div>
-        <div id="popup">
-            <form>
-                <input type="text" name="title" id="title" placeholder="Podaj tytuł notatki">
-                <input type="text" name="value" id="value" placeholder="Podaj treść notatki.">
-                <select>
-                    <option value="red">Czerwony</option>
-                </select>
-                <input type="submit" value="Wyślij" id="submitButton">
-            </form>
-        </div>
-        
-        <div id="tasks">
-         
-        </div>
+  <h1>NotePocket</h1>
+  <form>
+    <textarea name="formNoteText" id="formNoteText" cols="50" rows="8" maxlength="300"></textarea>
+    <div class="d-flex">
+      <select name="formColor" id="formColor">
+        <option value="none">Wybierz kolor</option>
+        <option value="red">Czerwony</option>
+        <option value="green">Zielony</option>
+        <option value="blue">Niebieski</option>
+        <option value="yellow">Zółty</option>
+      </select>
+      <button id="formAddButton">Dodaj notke</button>
+    </div>
+  </form>
+
+  <div id="notes"></div>
 
     </main>
+    <script src="notepocket.js"></script>
 </body>
 </html>
-<script src="skrypt.js"></script>
