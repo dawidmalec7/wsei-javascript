@@ -1,16 +1,9 @@
-/*map = new google.maps.Map(document.getElementById('map'), {
-        zoom: 8,
-        center: uluru,
-        // keyboardShortcuts: false
-    });
-navigator.geolocation.getCurrentPosition(geoOk, geoFail)
-ws = new WebSocket(url)
- */
 let uluru, map, marker
 let ws
 let players = {}
 let nick = '1'
- 
+
+// Tworzenie mapy
 function initMap() {
     uluru = { lat: -25.363, lng: 131.044 };
     map = new google.maps.Map(document.getElementById('map'), {
@@ -23,16 +16,16 @@ function initMap() {
         position: uluru,
         map: map,
         animation: google.maps.Animation.DROP
-        //   icon: 'https://static.goldenline.pl/user_photo/221/user_43997_34a2a8_huge.jpg'
     });
     getLocalization()
     startWebSocket()
     addKeyboardEvents()
 }
- 
+ //Przypicie zdarzenia do poruszania markerem
 function addKeyboardEvents() {
     window.addEventListener('keydown', poruszMarkerem)
 }
+// Funckja do poruszania markerem
 function poruszMarkerem(ev) {
     let lat = marker.getPosition().lat()
     let lng = marker.getPosition().lng()
@@ -63,16 +56,18 @@ function poruszMarkerem(ev) {
     marker.setPosition(position)
     ws.send(JSON.stringify(wsData))
 }
+// Websocket
 function startWebSocket() {
     let url = 'ws://91.121.6.192:8010'
     ws = new WebSocket(url)
     ws.addEventListener('open', onWSOpen)
     ws.addEventListener('message', onWSMessage)
 }
- 
+// Data z websocket
 function onWSOpen(data) {
     console.log(data)
 }
+//
 function onWSMessage(e) {
     let data = JSON.parse(e.data)
  
@@ -89,14 +84,12 @@ function onWSMessage(e) {
         })
     }
 }
- 
- 
- 
+//Pobranie geolokalizacji
 function getLocalization() {
     navigator.geolocation.getCurrentPosition(geoOk, geoFail)
- 
 }
- 
+
+//Pobranie lat / long od uzytkownika
 function geoOk(data) {
     let coords = {
         lat: data.coords.latitude,
@@ -106,6 +99,7 @@ function geoOk(data) {
     marker.setPosition(coords)
 }
  
+//Funkcja wywyołana jeśli użytkownik odmówi geolokalizacji
 function geoFail(err) {
     console.log(err)
 }
